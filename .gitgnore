@@ -1,0 +1,4 @@
+config/settings_data.json
+.DS_STORE
+node_mdules/
+*.log
