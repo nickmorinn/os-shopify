@@ -11,45 +11,46 @@
       <div class="hero__content__wrapper {{ section.settings.text_align }}">
         <div class="hero__content {{ section.settings.color_bg }}">
           <div class="text__standard {{ section.settings.text_color }}">
-            
-            {% if section.settings.kicker_text != blank %}
-              <div class="hero__kicker">
-                <p>✦ {{ section.settings.kicker_text }}</p>
-              </div>
-            {% endif %}
+            <div class="thirsty-banner__content">
+              {% if section.settings.kicker_text != blank %}
+                <div class="hero__kicker">
+                  <p>✦ {{ section.settings.kicker_text }}</p>
+                </div>
+              {% endif %}
 
-            {% if section.settings.rating_text != blank %}
-              <div class="hero__rating">
-                <p>★★★★★ {{ section.settings.rating_text }}</p>
-              </div>
-            {% endif %}
+              {% if section.settings.rating_text != blank %}
+                <div class="hero__rating">
+                  <p>★★★★★ {{ section.settings.rating_text }}</p>
+                </div>
+              {% endif %}
 
-            {% if section.settings.heading != blank %}
-              <div class="hero__title">
-                <h2>{{ section.settings.heading }}</h2>
-              </div>
-            {% endif %}
+              {% if section.settings.heading != blank %}
+                <div class="hero__title">
+                  <h2>{{ section.settings.heading }}</h2>
+                </div>
+              {% endif %}
 
-            {% if section.settings.button_text != blank %}
-              <div class="hero__cta__wrapper">
-                <a href="{{ section.settings.button_link }}" 
-                   class="standard__cta hero__btn {{ section.settings.button_style }} {{ section.settings.button_color }} {{ section.settings.button_size }}">
-                  {{ section.settings.button_text }}
-                </a>
+              {% if section.settings.button_text != blank %}
+                <div class="hero__cta__wrapper">
+                  <a href="{{ section.settings.button_link }}" 
+                     class="standard__cta hero__btn {{ section.settings.button_style }} {{ section.settings.button_color }} {{ section.settings.button_size }}">
+                    {{ section.settings.button_text }}
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+
+            {% if section.settings.image != blank %}
+              <div class="thirsty-banner__image">
+                {%- assign wh_ratio = section.settings.image.aspect_ratio | default: 1 -%}
+                {% render 'image', 
+                  img_object: section.settings.image,
+                  max_width: section.settings.image_max_width,
+                  wh_ratio: wh_ratio
+                %}
               </div>
             {% endif %}
           </div>
-
-          {% if section.settings.image != blank %}
-            <div class="hero__image">
-              {%- assign wh_ratio = section.settings.image.aspect_ratio | default: 1 -%}
-              {% render 'image', 
-                img_object: section.settings.image,
-                max_width: section.settings.image_max_width,
-                wh_ratio: wh_ratio
-              %}
-            </div>
-          {% endif %}
         </div>
       </div>
     </div>
@@ -76,23 +77,33 @@
   line-height: 1.1;
 }
 
-.hero__image {
-  max-width: 100%;
-  margin-top: 2em;
+.thirsty-banner__content {
+  flex: 1;
+  padding: 2em;
 }
 
-.hero__content {
+.thirsty-banner__image {
+  flex: 1;
+  max-width: 50%;
+  padding: 2em;
+}
+
+.text__standard {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 2em;
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {
-  .hero__content {
+  .text__standard {
     flex-direction: column;
   }
   
+  .thirsty-banner__image {
+    max-width: 100%;
+  }
+
   .hero__title h2 {
     font-size: 2.5em;
   }
@@ -146,8 +157,9 @@
       "label": "Button Style",
       "default": "btn",
       "options": [
-        { "value": "btn", "label": "Solid" },
-        { "value": "btn--outline", "label": "Outline" }
+        { "value": "btn", "label": "Solid button" },
+        { "value": "btn--soft", "label": "Soft button" },
+        { "value": "btn--outline", "label": "Outlined button" }
       ]
     },
     {
@@ -156,9 +168,10 @@
       "label": "Button Size",
       "default": "btn--large",
       "options": [
-        { "value": "btn--small", "label": "Small" },
-        { "value": "btn--medium", "label": "Medium" },
-        { "value": "btn--large", "label": "Large" }
+        { "value": "btn--small", "label": "Small button" },
+        { "value": "btn--medium", "label": "Medium button" },
+        { "value": "btn--large", "label": "Large button" },
+        { "value": "btn--long", "label": "Long button" }
       ]
     },
     {
@@ -167,7 +180,9 @@
       "label": "Button Color",
       "default": "btn--black",
       "options": [
-        { "value": "btn--primary", "label": "Primary" },
+        { "value": "btn--primary", "label": "Bright accent" },
+        { "value": "btn--secondary", "label": "Secondary accent" },
+        { "value": "btn--neutral", "label": "Text color" },
         { "value": "btn--black", "label": "Black" },
         { "value": "btn--white", "label": "White" }
       ]
@@ -201,6 +216,7 @@
       "label": "Width",
       "default": "wrapper--full",
       "options": [
+        { "value": "wrapper--none", "label": "Full width" },
         { "value": "wrapper--full", "label": "Full width padded" },
         { "value": "wrapper", "label": "Page width" }
       ]
@@ -220,10 +236,18 @@
       "type": "select",
       "id": "text_color",
       "label": "Text color",
-      "default": "text--black",
+      "default": "text--neutral",
       "options": [
+        { "value": "text--neutral", "label": "Normal text" },
+        { "value": "text--white", "label": "White" },
+        { "value": "text--primary", "label": "Primary accent" },
+        { "value": "text--secondary", "label": "Secondary accent" },
         { "value": "text--black", "label": "Black" },
-        { "value": "text--white", "label": "White" }
+        { "value": "text--invert--primary", "label": "Primary dark accent" },
+        { "value": "text--invert--secondary", "label": "Secondary dark accent" },
+        { "value": "text--invert", "label": "Inverted text color" },
+        { "value": "text--bright--primary", "label": "Primary bright accent" },
+        { "value": "text--bright--secondary", "label": "Secondary bright accent" }
       ]
     },
     {
@@ -232,8 +256,13 @@
       "label": "Background color",
       "default": "palette--light bg--neutral",
       "options": [
-        { "value": "hero__content--transparent", "label": "None" },
-        { "value": "palette--light bg--neutral", "label": "White" }
+        { "value": "hero__content--transparent", "label": "Transparent" },
+        { "value": "palette--light bg--neutral", "label": "White" },
+        { "value": "palette--light bg--accent", "label": "Light" },
+        { "value": "palette--dark bg--invert", "label": "Dark" },
+        { "value": "palette--dark bg--invert--accent", "label": "Dark accent" },
+        { "value": "palette--bright bg--bright", "label": "Bright" },
+        { "value": "palette--bright bg--bright--accent", "label": "Bright accent" }
       ]
     },
     {
@@ -264,7 +293,9 @@
         "kicker_text": "OPENSOURCE",
         "rating_text": "1000+ QUENCHED",
         "heading": "Click if you're thirsty.",
-        "button_text": "SHOP ELECTROLYTES"
+        "button_text": "SHOP ELECTROLYTES",
+        "text_color": "text--neutral",
+        "color_bg": "palette--light bg--neutral"
       }
     }
   ]
