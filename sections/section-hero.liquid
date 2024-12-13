@@ -18,36 +18,57 @@
       <div class="hero__content__wrapper {{ section.settings.text_align }}">
         <div class="hero__content {{ section.settings.color_bg }} js-overflow-content">
           {%- assign animation_anchor = "[data-section-id='" | append: section.id | append: "']" -%}
-          {%- assign elements_counter = 0 -%}
 
           <div class="text__standard {{ section.settings.text_color }} {% if section.settings.enable_overlay_text %} backdrop--hero{% endif %}" {% if section.settings.enable_overlay_text %} style="--bg: {{ section.settings.overlay_color }}; --opacity: {{ section.settings.overlay_opacity | times: 0.01 }};"{% endif %}>
-            
-            <!-- Star Rating -->
-            <div class="hero__rating"
-              data-aos="hero"
-              data-aos-anchor="{{ animation_anchor }}"
-              data-aos-order="1">
-              <div class="rating__stars">★★★★★</div>
-              <div class="rating__text">1000+ QUENCHED</div>
-            </div>
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'kicker' %}
+                  <div class="hero__kicker heading-size-{{ block.settings.text_size }}"
+                    data-aos="hero"
+                    data-aos-anchor="{{ animation_anchor }}"
+                    data-aos-order="{{ forloop.index }}">
+                    {{ block.settings.kicker }}
+                  </div>
 
-            <!-- Main Heading -->
-            <div class="hero__title heading-size-10"
-              data-aos="hero"
-              data-aos-anchor="{{ animation_anchor }}"
-              data-aos-order="2">
-              <h1>Click if you're thirsty.</h1>
-            </div>
+                {% when 'heading' %}
+                  <div class="hero__title heading-size-{{ block.settings.text_size }}"
+                    data-aos="hero"
+                    data-aos-anchor="{{ animation_anchor }}"
+                    data-aos-order="{{ forloop.index }}">
+                    {{ block.settings.title }}
+                  </div>
 
-            <!-- CTA Button -->
-            <div class="hero__cta__wrapper"
-              data-aos="hero"
-              data-aos-anchor="{{ animation_anchor }}"
-              data-aos-order="3">
-              <a href="/collections/all" class="btn btn--black btn--large">
-                SHOP ELECTROLYTES
-              </a>
-            </div>
+                {% when 'text' %}
+                  <div class="hero__text heading-size-{{ block.settings.text_size }}"
+                    data-aos="hero"
+                    data-aos-anchor="{{ animation_anchor }}"
+                    data-aos-order="{{ forloop.index }}">
+                    {{ block.settings.richtext }}
+                  </div>
+
+                {% when 'button' %}
+                  <div class="hero__buttons"
+                    data-aos="hero"
+                    data-aos-anchor="{{ animation_anchor }}"
+                    data-aos-order="{{ forloop.index }}">
+                    {% if block.settings.link_text_1 != blank %}
+                      <a href="{{ block.settings.link_1 }}" class="{{ block.settings.button_style_1 }} {{ block.settings.button_size_1 }} {{ block.settings.button_color_1 }}">
+                        {{ block.settings.link_text_1 }}
+                      </a>
+                    {% endif %}
+                    {% if block.settings.link_text_2 != blank %}
+                      <a href="{{ block.settings.link_2 }}" class="{{ block.settings.button_style_2 }} {{ block.settings.button_size_2 }} {{ block.settings.button_color_2 }}">
+                        {{ block.settings.link_text_2 }}
+                      </a>
+                    {% endif %}
+                    {% if block.settings.link_text_3 != blank %}
+                      <a href="{{ block.settings.link_3 }}" class="{{ block.settings.button_style_3 }} {{ block.settings.button_size_3 }} {{ block.settings.button_color_3 }}">
+                        {{ block.settings.link_text_3 }}
+                      </a>
+                    {% endif %}
+                  </div>
+              {% endcase %}
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -92,31 +113,359 @@
       ]
     },
     {
-      "type": "select",
-      "id": "text_color",
-      "label": "Text color",
-      "default": "text--black",
-      "options": [
-        { "value": "text--black", "label": "Black"},
-        { "value": "text--white", "label": "White"}
-      ]
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "default": 15,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_overlay_text",
+      "label": "Enable text overlay backdrop",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "preload_image",
+      "label": "Preload hero image",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width",
+      "default": 2000,
+      "min": 1000,
+      "max": 2000,
+      "step": 100,
+      "unit": "px"
     },
     {
       "type": "select",
       "id": "text_align",
       "label": "Text alignment",
-      "default": "align--middle-left",
+      "default": "align--middle-center",
       "options": [
-        { "value": "align--middle-left", "label": "Left"},
-        { "value": "align--middle-center", "label": "Center"},
-        { "value": "align--middle-right", "label": "Right"}
+        { "value": "align--top-left", "label": "Top left"},
+        { "value": "align--top-center", "label": "Top center"},
+        { "value": "align--top-right", "label": "Top right"},
+        { "value": "align--middle-left", "label": "Middle left"},
+        { "value": "align--middle-center", "label": "Middle center"},
+        { "value": "align--middle-right", "label": "Middle right"},
+        { "value": "align--bottom-left", "label": "Bottom left"},
+        { "value": "align--bottom-center", "label": "Bottom center"},
+        { "value": "align--bottom-right", "label": "Bottom right"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "text--white",
+      "options": [
+        { "value": "text--neutral", "label": "Normal color"},
+        { "value": "text--white", "label": "White"},
+        { "value": "text--primary", "label": "Primary accent"},
+        { "value": "text--secondary", "label": "Secondary accent"},
+        { "value": "text--black", "label": "Black"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color_bg",
+      "label": "Background color",
+      "default": "hero__content--transparent",
+      "options": [
+        { "value": "hero__content--transparent", "label": "None"},
+        { "value": "hero__content--white", "label": "White"},
+        { "value": "hero__content--primary", "label": "Primary accent"},
+        { "value": "hero__content--secondary", "label": "Secondary accent"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "wrapper--none",
+      "options": [
+        { "value": "wrapper--none", "label": "Full width"},
+        { "value": "wrapper", "label": "Normal"},
+        { "value": "wrapper--narrow", "label": "Narrow"}
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom spacing",
+      "default": 0,
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "kicker",
+      "name": "Kicker text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "kicker",
+          "label": "Text",
+          "default": "<p>Introducing</p>"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text size",
+          "default": 3,
+          "min": 1,
+          "max": 15,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Heading",
+          "default": "<p>Hero heading</p>"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text size",
+          "default": 11,
+          "min": 1,
+          "max": 15,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "richtext",
+          "label": "Text",
+          "default": "<p>Share information about your brand</p>"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text size",
+          "default": 6,
+          "min": 1,
+          "max": 15,
+          "step": 1
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Buttons",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Button 1"
+        },
+        {
+          "type": "text",
+          "id": "link_text_1",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "link_1",
+          "label": "URL"
+        },
+        {
+          "type": "select",
+          "id": "button_size_1",
+          "label": "Size",
+          "default": "btn--long",
+          "options": [
+            { "value": "btn--small", "label": "Small"},
+            { "value": "btn--medium", "label": "Medium"},
+            { "value": "btn--large", "label": "Large"},
+            { "value": "btn--long", "label": "Long"}
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_style_1",
+          "label": "Style",
+          "default": "btn",
+          "options": [
+            { "value": "btn", "label": "Solid"},
+            { "value": "btn--outline", "label": "Outline"},
+            { "value": "btn--text", "label": "Text"},
+            { "value": "btn-text-thick-line", "label": "Text with thick line"}
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_color_1",
+          "label": "Color",
+          "default": "btn--white",
+          "options": [
+            { "value": "btn--primary", "label": "Primary accent"},
+            { "value": "btn--secondary", "label": "Secondary accent"},
+            { "value": "btn--neutral", "label": "Text color"},
+            { "value": "btn--black", "label": "Black"},
+            { "value": "btn--white", "label": "White"}
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Button 2"
+        },
+        {
+          "type": "text",
+          "id": "link_text_2",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "link_2",
+          "label": "URL"
+        },
+        {
+          "type": "select",
+          "id": "button_size_2",
+          "label": "Size",
+          "default": "btn--long",
+          "options": [
+            { "value": "btn--small", "label": "Small"},
+            { "value": "btn--medium", "label": "Medium"},
+            { "value": "btn--large", "label": "Large"},
+            { "value": "btn--long", "label": "Long"}
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_style_2",
+          "label": "Style",
+          "default": "btn-text-thick-line",
+          "options": [
+            { "value": "btn", "label": "Solid"},
+            { "value": "btn--outline", "label": "Outline"},
+            { "value": "btn--text", "label": "Text"},
+            { "value": "btn-text-thick-line", "label": "Text with thick line"}
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_color_2",
+          "label": "Color",
+          "default": "btn--neutral",
+          "options": [
+            { "value": "btn--primary", "label": "Primary accent"},
+            { "value": "btn--secondary", "label": "Secondary accent"},
+            { "value": "btn--neutral", "label": "Text color"},
+            { "value": "btn--black", "label": "Black"},
+            { "value": "btn--white", "label": "White"}
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Button 3"
+        },
+        {
+          "type": "text",
+          "id": "link_text_3",
+          "label": "Text"
+        },
+        {
+          "type": "url",
+          "id": "link_3",
+          "label": "URL"
+        },
+        {
+          "type": "select",
+          "id": "button_size_3",
+          "label": "Size",
+          "default": "btn--long",
+          "options": [
+            { "value": "btn--small", "label": "Small"},
+            { "value": "btn--medium", "label": "Medium"},
+            { "value": "btn--large", "label": "Large"},
+            { "value": "btn--long", "label": "Long"}
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_style_3",
+          "label": "Style",
+          "default": "btn-text-thick-line",
+          "options": [
+            { "value": "btn", "label": "Solid"},
+            { "value": "btn--outline", "label": "Outline"},
+            { "value": "btn--text", "label": "Text"},
+            { "value": "btn-text-thick-line", "label": "Text with thick line"}
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_color_3",
+          "label": "Color",
+          "default": "btn--white",
+          "options": [
+            { "value": "btn--primary", "label": "Primary accent"},
+            { "value": "btn--secondary", "label": "Secondary accent"},
+            { "value": "btn--neutral", "label": "Text color"},
+            { "value": "btn--black", "label": "Black"},
+            { "value": "btn--white", "label": "White"}
+          ]
+        }
       ]
     }
   ],
   "presets": [
     {
       "name": "Hero Banner",
-      "category": "Image"
+      "category": "Image",
+      "blocks": [
+        {
+          "type": "kicker"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
+      ]
     }
   ]
 }
@@ -134,42 +483,23 @@
   padding: 2rem;
 }
 
-.hero__rating {
-  margin-bottom: 1rem;
-}
-
-.rating__stars {
-  color: #000;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.rating__text {
-  font-weight: bold;
-  font-size: 1rem;
-}
-
-.hero__title h1 {
-  font-size: 4rem;
-  line-height: 1.1;
-  font-weight: bold;
-  margin: 1rem 0;
-}
-
-.hero__cta__wrapper {
+.hero__buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
   margin-top: 2rem;
 }
 
-.btn--black {
-  background: #000;
-  color: #fff;
-  padding: 1rem 2rem;
-  text-transform: uppercase;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
+.hero__kicker {
+  margin-bottom: 1rem;
+}
+
+.hero__title {
+  margin: 1rem 0;
+}
+
+.hero__text {
+  margin: 1rem 0;
 }
 
 .hero__image__wrapper {
@@ -193,8 +523,8 @@
     grid-template-columns: 1fr;
   }
   
-  .hero__title h1 {
-    font-size: 3rem;
+  .hero__buttons {
+    justify-content: center;
   }
 }
 </style>
