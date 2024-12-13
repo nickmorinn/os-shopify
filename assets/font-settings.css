@@ -1,0 +1,82 @@
+
+
+
+@font-face {
+  font-family: Oswald;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("//oslytes.com/cdn/fonts/oswald/oswald_n7.f71e68b857a7b8128a7629452b9c6bf9468356a7.woff2?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=e35eb3f9caf865b57a4accf0654b439696d3583c0dc004c234a4ebc5b8f25548") format("woff2"),
+       url("//oslytes.com/cdn/fonts/oswald/oswald_n7.2767cc6e7cfc91284caa2c06eb07eca21a27681e.woff?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=5c3fe5fffc429af499c55528227577ce53ab9b6b56e63480b800a62adefca27c") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//oslytes.com/cdn/fonts/poppins/poppins_n4.934accbf9f5987aa89334210e6c1e9151f37d3b6.woff2?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=6d3091307995129fbb2e77ffd10ed970b4200046f05d443f26b038817004d7f5") format("woff2"),
+       url("//oslytes.com/cdn/fonts/poppins/poppins_n4.ee28d4489eaf5de9cf6e17e696991b5e9148c716.woff?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=75f7b7737ca4e730baa66f48468795e232b556b4ee4296e256929b250575f800") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//oslytes.com/cdn/fonts/poppins/poppins_n4.934accbf9f5987aa89334210e6c1e9151f37d3b6.woff2?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=6d3091307995129fbb2e77ffd10ed970b4200046f05d443f26b038817004d7f5") format("woff2"),
+       url("//oslytes.com/cdn/fonts/poppins/poppins_n4.ee28d4489eaf5de9cf6e17e696991b5e9148c716.woff?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=75f7b7737ca4e730baa66f48468795e232b556b4ee4296e256929b250575f800") format("woff");
+}
+
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("//oslytes.com/cdn/fonts/poppins/poppins_n5.25334cd7ff48c81cfd51a6bc5a81d92a1b4d4501.woff2?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=efbcde7fc74b189a9a4058a4f3e675c8791c0d2f1af197afabe3e2144aa56cf1") format("woff2"),
+       url("//oslytes.com/cdn/fonts/poppins/poppins_n5.fc8eae64d8f1b5d2b8c42b45ddc0749aff4750a6.woff?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=dc087a97216429ab8b53c181aeeae7871be21c55824d6c8f109d5a86b7971c46") format("woff");
+}
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("//oslytes.com/cdn/fonts/poppins/poppins_n5.25334cd7ff48c81cfd51a6bc5a81d92a1b4d4501.woff2?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=efbcde7fc74b189a9a4058a4f3e675c8791c0d2f1af197afabe3e2144aa56cf1") format("woff2"),
+       url("//oslytes.com/cdn/fonts/poppins/poppins_n5.fc8eae64d8f1b5d2b8c42b45ddc0749aff4750a6.woff?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=dc087a97216429ab8b53c181aeeae7871be21c55824d6c8f109d5a86b7971c46") format("woff");
+}
+
+
+
+
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url("//oslytes.com/cdn/fonts/poppins/poppins_i4.a7e8d886e15d5fb9bc964a53b3278effbf270e9c.woff2?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=535036fbc2db2d07fae6da85a1bdcc6e1de83b4ec5eacdc3a2b09e907cc0df65") format("woff2"),
+       url("//oslytes.com/cdn/fonts/poppins/poppins_i4.e87de252199e27825a41bf81646996685d86452d.woff?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=a483bc828b0f06a9b8509a6bda61c17ad38f31b1649efbd5af2fd02d2bf10a06") format("woff");
+}
+
+
+
+  @font-face {
+  font-family: Poppins;
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  src: url("//oslytes.com/cdn/fonts/poppins/poppins_i5.7a2d84979134c226101806900bea600c71eeb63d.woff2?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=a0a73f55610a48b85b07c9d629d4e6e1fa5068df08e195f8b15fac4c7ebd787f") format("woff2"),
+       url("//oslytes.com/cdn/fonts/poppins/poppins_i5.8671d7a1ea0c17aae512b84c1f6f06c5ca63dd49.woff?h1=ZWQ2YzkwLTkzLmFjY291bnQubXlzaG9waWZ5LmNvbQ&h2=dGhlb3BlbnNvdXJjZS5jbw&h3=ZHJpbmtvcGVuc291cmNlLmNvbQ&h4=b3NhY3RpdmF0ZS5jb20&h5=b3NseXRlcy5jb20&hmac=44bd7855a578de3f0895ad76971754de2f742ef135d963af6f8c4d38206c948c") format("woff");
+}
+
+
