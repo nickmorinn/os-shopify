@@ -35,19 +35,12 @@
           {%- endif -%}
           {%- assign title_safe = sib_product.title | strip_html | escape -%}
           {%- assign color_name = sib_product.metafields.theme.cutline.value | default: title_safe -%}
-          {% capture aria_label %}
-            {{ color_name }}
-            {% if sib_product.available == false %}
-              - {{ 'products.product.sold_out' | t }}
-            {% endif %}
-          {% endcapture %}
           <a
             href="{{ sib_product.url }}"
             class="siblings__link {{ modifier_class }}"
             data-swapper-hover="{{ color_name }}"
             title="{{ color_name }}"
-            {% if sib_product.handle == product.handle %}aria-current="true"{%- endif -%}
-            aria-label="{{ aria_label }}"
+            {% if sib_product.handle == product.handle %}aria-selected="true"{%- endif -%}
           >
             <div class="siblings__swatch">
               <div class="sibling__image{% if settings.swatches_squares %} sibling__image--square{% endif %}">
@@ -70,6 +63,7 @@
                 -%}
               </div>
             </div>
+            <span class="visually-hidden">{{ color_name }}</span>
           </a>
         {%- endfor -%}
       </div>

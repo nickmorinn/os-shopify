@@ -1863,9 +1863,6 @@
                     x3: 25
                 },
                 on: {
-                    ready: ()=>{
-                        this.removeIncorrectAria();
-                    },
                     resize: ()=>{
                         this.toggleArrows();
                         this.calculatedArrowsTopPosition();
@@ -2044,13 +2041,6 @@
                     this.showArrows();
                 }
             }
-        }
-        // Flickity VERY annoyingly adds aria-hidden="true" to all slides except the current one which causes lighthouse accessibility failure
-        // see https://github.com/metafizzy/flickity/issues/1228
-        removeIncorrectAria() {
-            const slidesHidden = this.carousel.querySelectorAll('[aria-hidden="true"]');
-            slidesHidden.forEach((el)=>el.removeAttribute('aria-hidden')
-            );
         }
         constructor(){
             super();
@@ -3703,8 +3693,7 @@
         cartDrawer: '[data-drawer="drawer-cart"]'
     };
     const classes$w = {
-        visible: 'is-visible',
-        focusEnable: 'focus-enabled'
+        visible: 'is-visible'
     };
     let globalTimer;
     let CartPopdown = class CartPopdown {
@@ -3716,38 +3705,31 @@
                 // handle success
                 const fresh = document.createElement('div');
                 fresh.innerHTML = response.data;
-                instance.popdown.innerHTML = fresh.querySelector(selectors$O.apiContent).innerHTML;
+                instance.drawer.innerHTML = fresh.querySelector(selectors$O.apiContent).innerHTML;
                 instance.connectCartButton();
                 instance.connectCloseButton();
-                // If user is navigating with keyboard, focus on the view cart button after popdown opens
-                if (document.body.classList.contains(classes$w.focusEnable)) {
-                    const cartButton = instance.popdown.querySelector(selectors$O.cartToggleButton);
-                    setTimeout(()=>{
-                        cartButton.focus();
-                    }, 0);
-                }
             }).catch(function(error) {
                 console.warn(error);
             });
         }
         connectCloseButton() {
             // Enable close button
-            this.popdown.classList.add(classes$w.visible);
-            const closer = this.popdown.querySelector(selectors$O.closeDrawer);
+            this.drawer.classList.add(classes$w.visible);
+            const closer = this.drawer.querySelector(selectors$O.closeDrawer);
             closer.addEventListener('click', (function(e) {
                 e.preventDefault();
-                this.popdown.classList.remove(classes$w.visible);
+                this.drawer.classList.remove(classes$w.visible);
             }).bind(this));
             this.popdownTimer();
         }
         connectCartButton() {
             // Hook into cart drawer
-            const cartButton = this.popdown.querySelector(selectors$O.cartToggleButton);
+            const cartButton = this.drawer.querySelector(selectors$O.cartToggleButton);
             const cartDrawer = document.querySelector(selectors$O.cartDrawer);
             if (cartDrawer) {
                 cartButton.addEventListener('click', (function(e) {
                     e.preventDefault();
-                    this.popdown.classList.remove(classes$w.visible);
+                    this.drawer.classList.remove(classes$w.visible);
                     cartDrawer.dispatchEvent(new CustomEvent('theme:drawer:open', {
                         bubbles: false
                     }));
@@ -3757,16 +3739,11 @@
         popdownTimer() {
             clearTimeout(globalTimer);
             globalTimer = setTimeout(()=>{
-                if (this.popdown.contains(document.activeElement)) {
-                    // While the user is focused inside of the popdown keep restarting the auto-close timer
-                    this.popdownTimer();
-                } else {
-                    this.popdown.classList.remove(classes$w.visible);
-                }
+                this.drawer.classList.remove(classes$w.visible);
             }, 5000);
         }
         constructor(){
-            this.popdown = document.querySelector(selectors$O.wrapper);
+            this.drawer = document.querySelector(selectors$O.wrapper);
             this.cartAjaxEnabled = document.querySelector(selectors$O.cartAjaxEnabled);
             this.cartAjaxDisabled = document.querySelector(selectors$O.cartAjaxDisabled);
             document.addEventListener('theme:cart:popdown', (e)=>{
@@ -5861,8 +5838,6 @@
             }
             this.wrapper.classList.toggle(classes$n.wrapperModifier, this.wrapperWidthWithGutter >= window.innerWidth);
         }
-        // Flickity VERY annoyingly adds aria-hidden="true" to all slides except the current one which causes lighthouse accessibility failure
-        // see https://github.com/metafizzy/flickity/issues/1228
         removeIncorrectAria() {
             const slidesHidden = this.slideshow.querySelectorAll('[aria-hidden="true"]');
             slidesHidden.forEach((el)=>el.removeAttribute('aria-hidden')
@@ -18197,12 +18172,182 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         return factory(target, keyframesOrOptions, options);
     }
 
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
     var ThemeEvent;
     (function(ThemeEvent1) {
-        ThemeEvent1["CART_ITEM_ADD"] = "theme:cart-item:add";
-        ThemeEvent1["CART_ITEM_UPDATE"] = "theme:cart-item:update";
+        ThemeEvent1["CART_OVERLAY_OPENED"] = "theme:cart-overlay:opened";
+        ThemeEvent1["CART_DROPDOWN_OPENED"] = "theme:cart-dropdown:opened";
+        ThemeEvent1["CART_ITEM_ADDED"] = "theme:cart-item:added";
+        ThemeEvent1["CART_ITEM_UPDATED"] = "theme:cart-item:updated";
         ThemeEvent1["ERROR"] = "theme:error";
     })(ThemeEvent || (ThemeEvent = {}));
+
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
 
     var ThemeEditorEvent;
     (function(ThemeEditorEvent1) {
@@ -18217,6 +18362,33 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         ThemeEditorEvent1["BLOCK_DESELECT"] = "shopify:block:deselect";
     })(ThemeEditorEvent || (ThemeEditorEvent = {}));
 
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
     undefined && undefined.__rest || function(s, e) {
         var t = {};
         for(var p in s)if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
@@ -18225,8 +18397,169 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
         }
         return t;
     };
+    var __await = undefined && undefined.__await || function(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    };
+    undefined && undefined.__asyncGenerator || function(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function() {
+            return this;
+        }, i;
+        function awaitReturn(f) {
+            return function(v) {
+                return Promise.resolve(v).then(f, reject);
+            };
+        }
+        function verb(n, f) {
+            if (g[n]) {
+                i[n] = function(v) {
+                    return new Promise(function(a, b) {
+                        q.push([
+                            n,
+                            v,
+                            a,
+                            b
+                        ]) > 1 || resume(n, v);
+                    });
+                };
+                if (f) i[n] = f(i[n]);
+            }
+        }
+        function resume(n, v) {
+            try {
+                step(g[n](v));
+            } catch (e) {
+                settle(q[0][3], e);
+            }
+        }
+        function step(r) {
+            r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+        }
+        function fulfill(value) {
+            resume("next", value);
+        }
+        function reject(value) {
+            resume("throw", value);
+        }
+        function settle(f, v) {
+            if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
+        }
+    };
 
-    const ANIMATE_CONTEXT_KEY = Symbol('ANIMATE_CONTEXT_KEY');
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    undefined && undefined.__awaiter || function(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P ? value : new P(function(resolve) {
+                resolve(value);
+            });
+        }
+        return new (P || (P = Promise))(function(resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator["throw"](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+            }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    };
+
+    const $animate = Symbol('$m1.animate');
     function motionone(Alpine) {
         Alpine.directive('animate', ($el, { expression , modifiers  }, { evaluateLater , effect , cleanup  })=>{
             if (!isHtmlElement($el)) {
@@ -18252,7 +18585,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
                 });
                 // Make controls available on node
                 Alpine.addScopeToNode($el, {
-                    [ANIMATE_CONTEXT_KEY]: context
+                    [$animate]: context
                 });
             });
         });
@@ -18267,7 +18600,7 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             })
         );
         Alpine.magic('animation', ($el)=>{
-            const context = Alpine.$data($el)[ANIMATE_CONTEXT_KEY];
+            const context = Alpine.$data($el)[$animate];
             if (!context) throw new Error('$animation needs to be used on or inside an element with x-animate directive');
             return context.controls;
         });
@@ -18331,11 +18664,11 @@ ${expression ? 'Expression: "' + expression + '"\n\n' : ""}`, el);
             }
         };
     }
-    function announcementSlider(speed = 4000) {
+    function announcementSlider(speed = 8000) {
         return {
             options: {
                 initialIndex: 0,
-                autoPlay: speed,
+                autoPlay: 8000,
                 contain: true,
                 pageDots: false,
                 adaptiveHeight: true,

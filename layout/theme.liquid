@@ -18,7 +18,7 @@
     <link rel="canonical" href="{{ canonical_url }}">
   {%- endif -%}
 
-  <!-- ======================= Pipeline Theme V7.4.1 ========================= -->
+  <!-- ======================= Pipeline Theme V7.3.0 ========================= -->
 
   <!-- Preloading ================================================================== -->
 
@@ -146,7 +146,7 @@
       info: {
         name: 'pipeline'
       },
-      version: '7.4.1',
+      version: '7.3.0',
       moneyFormat: {{ shop.money_format | json }},
       shopCurrency: {{ shop.currency | json }},
       currencyCode: {{ cart.currency.iso_code | json }}
@@ -217,6 +217,18 @@
 
   <!-- Shopify app scripts =========================================================== -->
   {{ content_for_header }}
+
+<!-- 
+  /* EDITS: CUSTOM SHIT */ 
+  <style>
+      :root {
+        --FONT-HEADING-TRANSFORM: uppercase;
+    }
+  </style> -->
+
+
+
+  
 </head>
 
 
@@ -233,11 +245,9 @@
 
   {% sections 'group-footer' %}
 
-
   <div class="search--popdown">
     {% render 'search-predictive', version: 'search-popdown' %}
   </div>
-
 
   {% render 'template-swatch' %}
 

@@ -129,7 +129,13 @@
     --COLOR-NAV-TEXT-TRANSPARENT: {{ section.settings.transparent_text_color }};
     --COLOR-HEADER-TRANSPARENT-GRADIENT: {{ overlay_color }};
     --LOGO-PADDING: {{ section.settings.logo_padding | append: 'px' }};
-    --menu-backfill-height: auto;
+    --menu-backfill-height: 80px !important; /* Default for desktop */
+  }
+
+  @media (max-width: 768px) { /* Mobile screen sizes */
+    :root {
+      --menu-backfill-height: 40px !important;
+    }
   }
 {% endstyle %}
 

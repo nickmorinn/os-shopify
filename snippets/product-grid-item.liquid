@@ -226,7 +226,7 @@ assign placeholder = placeholder | default: false
             data-grid-item-variant="{{ current_variant.id }}"
             data-swatch-index="{{ forloop.index0 }}"
 
-            {% if visible %}aria-current="true"{%- endif -%}
+            {% if visible %}aria-selected="true"{%- endif -%}
             {% if current_variant.featured_media %}
               data-swatch-image="{{ current_variant.featured_media.preview_image.src }}"
             {% endif %}
@@ -364,7 +364,7 @@ assign placeholder = placeholder | default: false
                         data-grid-item-variant="{{ sib_product.variants[0].id }}"
                         data-grid-item-swatch-image="0"
                         title="{{ color_name }}"
-                        {% if sib_product.handle == product.handle %}aria-current="true"{%- endif -%}
+                        {% if sib_product.handle == product.handle %}aria-selected="true"{%- endif -%}
                       >
                         <div class="siblings__swatch">
                           <div class="sibling__image{% if settings.swatches_squares %} sibling__image--square{% endif %}">
@@ -408,7 +408,7 @@ assign placeholder = placeholder | default: false
 
       <div class="grid__swatch__container">
         <p class="grid__swatch__placeholder">{{ 'collections.general.swatches_with_count' | t: count: swatch_option.values.size }}</p>
-        <div class="grid__swatch__hover" aria-label="Options" data-swatch-handle="{{ product.handle }}" data-swatch-label="{{ label }}" data-sibling-inner data-scrollbar data-scrollbar-slider>
+        <div class="grid__swatch__hover" role="tablist" aria-label="Options" data-swatch-handle="{{ product.handle }}" data-swatch-label="{{ label }}" data-sibling-inner data-scrollbar data-scrollbar-slider>
           {{ swatch_link_markup }}
         </div>
 

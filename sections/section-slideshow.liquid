@@ -86,7 +86,7 @@
 
 
           {% if block.settings.link_text == '' and block.settings.link %}
-            <a class="link-over-image" href="{{ block.settings.link }}" aria-label="{{ block.settings.link.object.title | default: block.settings.title | strip_html | escape }}"></a>
+            <a class="link-over-image" href="{{ block.settings.link }}" aria-label="{{ block.settings.title | strip_html | escape }}"></a>
           {% endif %}
 
           {% if section.settings.height == 'use_screen_full' %}

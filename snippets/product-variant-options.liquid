@@ -73,7 +73,7 @@
               {%- endif -%}
               <div class="radio__inputs {{ lock_width_class }}">
                 {%- for value in option.values -%}
-                  {%- capture input_id -%}{{ product.id }}-{{ block.id }}-{{ option.name | escape_once }}-{{ value | escape_once | handleize }}{%- endcapture -%}
+                  {%- capture input_id -%}{{ product.id }}-{{ block.id }}-{{ option.name | escape_once }}-{{ value | escape_once }}{%- endcapture -%}
 
                   {%- if is_swatch_option -%}
                     <radio-swatch class="swatch__button{% if settings.swatches_squares %} swatch__button--square{% endif %}">
@@ -136,7 +136,6 @@
                       </li>
                     {%- endfor -%}
                   </ul>
-
 
                   <input
                     type="hidden"

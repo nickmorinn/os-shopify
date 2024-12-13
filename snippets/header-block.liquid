@@ -35,7 +35,7 @@ Required params:
     <div {{ block.shopify_attributes }}{% if block.settings.wide_element %} class="header__dropdown__element--wide"{% endif %}>
       <div class="header__dropdown__image section--image {{ block.settings.button_style }}" data-header-image>
         <div class="header__dropdown__image__holder">
-          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="link-over-image" {% if block.settings.link.object.title %} aria-label="{{ block.settings.link.object.title | strip_html | escape }}"{% endif %}>{%- endif -%}
+          {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" class="link-over-image">{%- endif -%}
           <div class="hero__content__wrapper align--middle-center">
             <div class="backdrop--wide"
               style="--bg: {{ block.settings.overlay_color }}; --opacity: {{ block.settings.overlay_opacity | times: 0.01 }};">

@@ -300,7 +300,6 @@
   width: auto;
   border-radius: 20px;
   overflow: hidden;
-  gap: 4px;
 }
 .product__mobile--slideshow .flickity-page-dots .flickity-page-dot,
 .flickity-badge-dots .flickity-page-dots .flickity-page-dot {
@@ -309,6 +308,7 @@
   z-index: 5;
   width: 3px;
   height: 3px;
+  margin: 0 5px;
   background: var(--bg);
   border-radius: 50%;
   opacity: 0.25;
@@ -317,14 +317,6 @@
 .product__mobile--slideshow .flickity-page-dots .flickity-page-dot.is-selected,
 .flickity-badge-dots .flickity-page-dots .flickity-page-dot.is-selected {
   opacity: 1;
-}
-.product__mobile--slideshow .flickity-page-dots .flickity-page-dot::before,
-.flickity-badge-dots .flickity-page-dots .flickity-page-dot::before {
-  content: '""';
-  position: absolute;
-  inset: -8px;
-  cursor: inherit;
-  z-index: -10;
 }
 [data-carousel] + * {
   margin-top: max(var(--gutter), 20px);
@@ -2898,13 +2890,6 @@ a.plyr__control::after, a.plyr__control::before {
 .pswp__element--disabled {
   display: none !important;
 }
-/* pswp chrome clickedClass target specificity issue */
-.pswp__button {
-  height: auto;
-}
-.pswp__button .icon-theme {
-  pointer-events: none;
-}
 /* ================ Tailwind ================ */
 /* ! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com */
 /*
@@ -3234,6 +3219,19 @@ video {
 [hidden] {
   display: none;
 }
+input[type="number"]{
+  -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-inner-spin-button{
+  margin: 0;
+  -webkit-appearance: none;
+          appearance: none;
+}
+input[type="number"]::-webkit-outer-spin-button{
+  margin: 0;
+  -webkit-appearance: none;
+          appearance: none;
+}
 :root{
   --space-1: 2px;
   --space-2: 4px;
@@ -3496,17 +3494,6 @@ video {
   text-transform: var(--font-transform);
   letter-spacing: var(--font-letter-spacing);
   -moz-osx-font-smoothing: grayscale;
-}
-.sr-only{
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }
 .pointer-events-none{
   pointer-events: none;
@@ -3945,9 +3932,6 @@ video {
 .border{
   border-width: 1px;
 }
-.border-0{
-  border-width: 0px;
-}
 .border-2{
   border-width: 2px;
 }
@@ -3963,9 +3947,6 @@ video {
 }
 .border-l{
   border-left-width: 1px;
-}
-.\!border-solid{
-  border-style: solid !important;
 }
 .border-\[--handle-color\]{
   border-color: var(--handle-color);
@@ -4365,6 +4346,61 @@ video {
 }
 .scrollbar-hide::-webkit-scrollbar{
   display: none;
+}
+@keyframes enterOpacity{
+  from{
+    opacity: var(--tw-enter-opacity, 1);
+  }
+}
+@keyframes exitOpacity{
+  to{
+    opacity: var(--tw-exit-opacity, 1);
+  }
+}
+@keyframes enterTransform{
+  from{
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale-x, 1), var(--tw-enter-scale-y, 1), var(--tw-enter-scale-z, 1)) rotate(var(--tw-enter-rotate, 0));
+  }
+}
+@keyframes exitTransform{
+  to{
+    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale-x, 1), var(--tw-exit-scale-y, 1), var(--tw-exit-scale-z, 1)) rotate(var(--tw-exit-rotate, 0));
+  }
+}
+.paused{
+  animation-play-state: paused;
+}
+.range{
+  pointer-events: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.range::-ms-thumb{
+  width: var(--range-handle-width, 20px);
+  height: var(--range-handle-height, 20px);
+  border-radius: 100%;
+  background: #000;
+  pointer-events: all;
+  appearance: none;
+}
+.range::-moz-range-thumb{
+  width: var(--range-handle-width, 20px);
+  height: var(--range-handle-height, 20px);
+  border-radius: 100%;
+  background: #000;
+  pointer-events: all;
+  -moz-appearance: none;
+       appearance: none;
+}
+.range::-webkit-slider-thumb{
+  width: var(--range-handle-width, 20px);
+  height: var(--range-handle-height, 20px);
+  border-radius: 100%;
+  background: #000;
+  pointer-events: all;
+  -webkit-appearance: none;
+          appearance: none;
 }
 .gradient-mask-r-10{
   -webkit-mask-image: linear-gradient(
@@ -10646,23 +10682,6 @@ button:hover .cta__dot {
 .add-action-errors .errors {
   margin: 0;
 }
-/* Shopify Shadow-DOM accelerated checkout buttons */
-.shopify-payment-button {
-  margin-top: 15px;
-}
-shopify-accelerated-checkout {
-  --shopify-accelerated-checkout-button-block-size: 54px;
-  --shopify-accelerated-checkout-button-border-radius: 2px;
-  --shopify-accelerated-checkout-button-box-shadow: none;
-}
-shopify-accelerated-checkout-cart {
-  --shopify-accelerated-checkout-button-block-size: 42px;
-  --shopify-accelerated-checkout-button-inline-size: 54px;
-  --shopify-accelerated-checkout-button-border-radius: 2px;
-  --shopify-accelerated-checkout-button-box-shadow: none;
-  --shopify-accelerated-checkout-inline-alignment: flex-start;
-  --shopify-accelerated-checkout-row-gap: 12px;
-}
 /* ============================================================================
   #Text links
 ============================================================================== */
@@ -13550,8 +13569,7 @@ body .shopify-email-marketing-confirmation__container {
   position: relative;
   text-align: left;
   margin: 0 auto;
-  width: 670px;
-  max-width: 100%;
+  max-width: 670px;
   padding: 64px var(--outer);
 }
 .shopify-policy__title h1,
@@ -20993,7 +21011,6 @@ a.product__form__link:after {
 }
 .checkout__button {
   padding: var(--space-8) var(--space-5);
-  border-radius: 0;
 }
 .additional-checkout-buttons {
   margin-top: 0;

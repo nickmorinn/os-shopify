@@ -46,9 +46,7 @@
       "toggle_with_count": {
         "one": "Show {{ count }} product per row",
         "other": "Show {{ count }} products per row"
-      },
-      "increase_quantity": "Increase quantity",
-      "decrease_quantity": "Decrease quantity"
+      }
     },
     "onboarding": {
       "product": "Product",
@@ -423,8 +421,6 @@
       "unit_price_label": "Unit price",
       "quantity": "Quantity",
       "add_to_cart": "Add to Cart",
-      "adding_to_cart": "Adding to Cart",
-      "added_to_cart": "Added to Cart",
       "add_x_to_cart": "Add {{ name }} to Cart",
       "remaining_html": "Only {{ inventory }} left in stock",
       "in_stock": "Item is in stock",

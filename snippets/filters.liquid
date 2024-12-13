@@ -116,22 +116,20 @@
         {% if accordion_open_boolean == false %} style="display: none;" {% endif %}
       >
         {%- for filter_value in filter.values -%}
-          {%- capture input_id -%}filter-{{ filter.label | handleize }}-{{ forloop.index }}{%- endcapture -%}
-
           {%- if is_image_option -%}
+
             {% comment %} Image display type renders the image with a checkbox using the natural ratio of the image and no cropping {% endcomment %}
             <li class="filter__button {% if forloop.index > limit %} is-hidden{% endif %}" data-option-holder>
               <input type="checkbox"
                 name="{{ filter_value.param_name }}"
                 value="{{ filter_value.value }}"
-                id="{{ input_id }}"
+                id="filter-{{ filter.label }}-{{ forloop.index }}"
                 {% if filter_value.active -%}checked{%- endif %}
                 {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
               <label
                 class="stateful-filter-icons"
                 data-swapper-hover="{{ filter_value.label | escape_once }}"
-                for="{{ input_id }}"
-                aria-label="{{ filter_value.label }}"
+                for="filter-{{ filter.label }}-{{ forloop.index }}"
               >
                 <span class="flex justify-start items-center">
                   {%- if filter_value.image -%}
@@ -151,10 +149,9 @@
             {%- if filter_value.swatch.image -%}
               {%- capture label -%}
                 <label
-                  for="{{ input_id }}"
+                  for="filter-{{ filter.label }}-{{ forloop.index }}"
                   data-swapper-hover="{{ filter_value.label | escape_once }}"
                   data-swatch="{{ filter_value.label | escape_once }}"
-                  aria-label="{{ filter_value.label }}"
                 >
                   {%- render 'image' img_object: filter_value.swatch.image, width: 34, wh_ratio: 1  -%}
                   <span class="visually-hidden">{{ filter_value.label }}</span>
@@ -163,11 +160,10 @@
             {%- elsif filter_value.swatch.color -%}
               {%- capture label -%}
                 <label
-                  for="{{ input_id }}"
+                  for="filter-{{ filter.label }}-{{ forloop.index }}"
                   data-swatch="{{ filter_value.label | escape_once }}"
                   data-swapper-hover="{{ filter_value.label | escape_once }}"
                   style="background-color: {{ filter_value.swatch.color  }};"
-                  aria-label="{{ filter_value.label }}"
                 >
                   <span class="visually-hidden">{{ filter_value.label }}</span>
                 </label>
@@ -176,10 +172,9 @@
               {% comment %} Theme swatches based on translation mating "color" {% endcomment %}
               {%- capture label -%}
                 <label
-                  for="{{ input_id }}"
+                  for="filter-{{ filter.label }}-{{ forloop.index }}"
                   data-swatch="{{ filter_value.label | escape_once }}"
                   data-swapper-hover="{{ filter_value.label | escape_once }}"
-                  aria-label="{{ filter_value.label }}"
                 >
                   <span class="visually-hidden">{{ filter_value.label }}</span>
                 </label>
@@ -191,7 +186,7 @@
                 <input type="checkbox"
                   name="{{ filter_value.param_name }}"
                   value="{{ filter_value.value }}"
-                  id="{{ input_id }}"
+                  id="filter-{{ filter.label }}-{{ forloop.index }}"
                   {% if filter_value.active -%}checked{%- endif %}
                   {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
                 {{ label }}
@@ -203,13 +198,10 @@
               <input type="checkbox"
                 name="{{ filter_value.param_name }}"
                 value="{{ filter_value.value }}"
-                id="{{ input_id }}"
+                id="filter-{{ filter.label }}-{{ forloop.index }}"
                 {% if filter_value.active -%}checked{%- endif %}
                 {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}>
-              <label class="stateful-filter-icons" for="{{ input_id }}" aria-label="{{ filter_value.label }}">
-                {{ filter_value.label | escape }}
-                {% render 'icon-stateful-box' %}{% render 'icon-core-refresh' %}
-              </label>
+              <label class="stateful-filter-icons" for="filter-{{ filter.label }}-{{ forloop.index }}">{{ filter_value.label | escape }}{% render 'icon-stateful-box' %}{% render 'icon-core-refresh' %}</label>
             </li>
           {%- endif -%}
         {%- endfor -%}

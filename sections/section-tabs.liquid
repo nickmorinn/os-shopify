@@ -13,25 +13,30 @@
       {%- capture tab_links -%}
         {{ tab_links }}
 
-        <button
-          class="inline-flex !border-solid border-0 border-b-[3px] py-r5 transition select-none type-body"
-          type="button"
-          :class="
-            isSelected({{ forloop.index0 }}) ?
-              'text-content/100 border-content/20' :
-              'text-content/50 hover:text-content/100 border-transparent'
-          "
-          x-bind="bindTab({{ forloop.index0 }})"
-          role="tab"
-          tabindex="0"
+        <li
+          class="inline-flex border-b-[3px]"
+          :class="isSelected({{ forloop.index0 }}) ? 'border-content/20' : 'border-transparent'"
 
-          {{ block.shopify_attributes }}
           {%- if request.design_mode -%}
-            @shopify:block:select="select({{ forloop.index0 }})"
+          @shopify:block:select="select({{ forloop.index0 }})"
           {%- endif -%}
         >
-          {{ title }}
-        </button>
+          <button
+            class="py-r5 transition select-none type-body"
+            role="tab"
+            type="button"
+            tabindex="0"
+            x-bind="bindTab({{ forloop.index0 }})"
+            :class="
+              isSelected({{ forloop.index0 }}) ?
+                'text-content/100' :
+                'text-content/50 hover:text-content/100'
+            "
+            {{ block.shopify_attributes }}
+          >
+            {{ title }}
+          </button>
+        </li>
       {%- endcapture -%}
 
       {%- capture tab_contents -%}
@@ -77,7 +82,7 @@
       >
         {% render 'icon-core-chevron-left' %}
       </button>
-      <div
+      <ul
         x-bind="bindTablist"
         role="tablist"
         class="mb-0 flex items-stretch space-x-r11 overflow-x-auto max-w-full scrollbar-hide"
@@ -97,7 +102,7 @@
         }"
       >
         {{ tab_links }}
-      </div>
+      </ul>
       <button
         x-cloak
         x-show="isOverflowing.right"
