@@ -11,6 +11,7 @@
       <div class="hero__content__wrapper {{ section.settings.text_align }}">
         <div class="hero__content {{ section.settings.color_bg }}">
           <div class="text__standard {{ section.settings.text_color }}">
+<<<<<<< HEAD
             <div class="thirsty-banner__content">
               {% if section.settings.kicker_text != blank %}
                 <div class="hero__kicker">
@@ -48,9 +49,47 @@
                   max_width: section.settings.image_max_width,
                   wh_ratio: wh_ratio
                 %}
+=======
+            
+            {% if section.settings.kicker_text != blank %}
+              <div class="hero__kicker">
+                <p>✦ {{ section.settings.kicker_text }}</p>
+              </div>
+            {% endif %}
+
+            {% if section.settings.rating_text != blank %}
+              <div class="hero__rating">
+                <p>★★★★★ {{ section.settings.rating_text }}</p>
+              </div>
+            {% endif %}
+
+            {% if section.settings.heading != blank %}
+              <div class="hero__title">
+                <h2>{{ section.settings.heading }}</h2>
+              </div>
+            {% endif %}
+
+            {% if section.settings.button_text != blank %}
+              <div class="hero__cta__wrapper">
+                <a href="{{ section.settings.button_link }}" 
+                   class="standard__cta hero__btn {{ section.settings.button_style }} {{ section.settings.button_color }} {{ section.settings.button_size }}">
+                  {{ section.settings.button_text }}
+                </a>
+>>>>>>> ccd726e (fix bugs)
               </div>
             {% endif %}
           </div>
+
+          {% if section.settings.image != blank %}
+            <div class="hero__image">
+              {%- assign wh_ratio = section.settings.image.aspect_ratio | default: 1 -%}
+              {% render 'image', 
+                img_object: section.settings.image,
+                max_width: section.settings.image_max_width,
+                wh_ratio: wh_ratio
+              %}
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -77,6 +116,7 @@
   line-height: 1.1;
 }
 
+<<<<<<< HEAD
 .thirsty-banner__content {
   flex: 1;
   padding: 2em;
@@ -104,6 +144,25 @@
     max-width: 100%;
   }
 
+=======
+.hero__image {
+  max-width: 100%;
+  margin-top: 2em;
+}
+
+.hero__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2em;
+}
+
+@media screen and (max-width: 768px) {
+  .hero__content {
+    flex-direction: column;
+  }
+  
+>>>>>>> ccd726e (fix bugs)
   .hero__title h2 {
     font-size: 2.5em;
   }
@@ -157,9 +216,14 @@
       "label": "Button Style",
       "default": "btn",
       "options": [
+<<<<<<< HEAD
         { "value": "btn", "label": "Solid button" },
         { "value": "btn--soft", "label": "Soft button" },
         { "value": "btn--outline", "label": "Outlined button" }
+=======
+        { "value": "btn", "label": "Solid" },
+        { "value": "btn--outline", "label": "Outline" }
+>>>>>>> ccd726e (fix bugs)
       ]
     },
     {
@@ -168,10 +232,16 @@
       "label": "Button Size",
       "default": "btn--large",
       "options": [
+<<<<<<< HEAD
         { "value": "btn--small", "label": "Small button" },
         { "value": "btn--medium", "label": "Medium button" },
         { "value": "btn--large", "label": "Large button" },
         { "value": "btn--long", "label": "Long button" }
+=======
+        { "value": "btn--small", "label": "Small" },
+        { "value": "btn--medium", "label": "Medium" },
+        { "value": "btn--large", "label": "Large" }
+>>>>>>> ccd726e (fix bugs)
       ]
     },
     {
@@ -180,9 +250,13 @@
       "label": "Button Color",
       "default": "btn--black",
       "options": [
+<<<<<<< HEAD
         { "value": "btn--primary", "label": "Bright accent" },
         { "value": "btn--secondary", "label": "Secondary accent" },
         { "value": "btn--neutral", "label": "Text color" },
+=======
+        { "value": "btn--primary", "label": "Primary" },
+>>>>>>> ccd726e (fix bugs)
         { "value": "btn--black", "label": "Black" },
         { "value": "btn--white", "label": "White" }
       ]
@@ -216,7 +290,6 @@
       "label": "Width",
       "default": "wrapper--full",
       "options": [
-        { "value": "wrapper--none", "label": "Full width" },
         { "value": "wrapper--full", "label": "Full width padded" },
         { "value": "wrapper", "label": "Page width" }
       ]
@@ -238,6 +311,7 @@
       "label": "Text color",
       "default": "text--neutral",
       "options": [
+<<<<<<< HEAD
         { "value": "text--neutral", "label": "Normal text" },
         { "value": "text--white", "label": "White" },
         { "value": "text--primary", "label": "Primary accent" },
@@ -248,6 +322,10 @@
         { "value": "text--invert", "label": "Inverted text color" },
         { "value": "text--bright--primary", "label": "Primary bright accent" },
         { "value": "text--bright--secondary", "label": "Secondary bright accent" }
+=======
+        { "value": "text--black", "label": "Black" },
+        { "value": "text--white", "label": "White" }
+>>>>>>> ccd726e (fix bugs)
       ]
     },
     {
@@ -256,6 +334,7 @@
       "label": "Background color",
       "default": "palette--light bg--neutral",
       "options": [
+<<<<<<< HEAD
         { "value": "hero__content--transparent", "label": "Transparent" },
         { "value": "palette--light bg--neutral", "label": "White" },
         { "value": "palette--light bg--accent", "label": "Light" },
@@ -263,6 +342,10 @@
         { "value": "palette--dark bg--invert--accent", "label": "Dark accent" },
         { "value": "palette--bright bg--bright", "label": "Bright" },
         { "value": "palette--bright bg--bright--accent", "label": "Bright accent" }
+=======
+        { "value": "hero__content--transparent", "label": "None" },
+        { "value": "palette--light bg--neutral", "label": "White" }
+>>>>>>> ccd726e (fix bugs)
       ]
     },
     {
@@ -293,9 +376,13 @@
         "kicker_text": "OPENSOURCE",
         "rating_text": "1000+ QUENCHED",
         "heading": "Click if you're thirsty.",
+<<<<<<< HEAD
         "button_text": "SHOP ELECTROLYTES",
         "text_color": "text--neutral",
         "color_bg": "palette--light bg--neutral"
+=======
+        "button_text": "SHOP ELECTROLYTES"
+>>>>>>> ccd726e (fix bugs)
       }
     }
   ]
