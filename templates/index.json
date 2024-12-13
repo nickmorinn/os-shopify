@@ -68,6 +68,49 @@
         "padding_bottom": 0
       }
     },
+    "thirsty_banner": {
+      "type": "section-thirsty-banner",
+      "blocks": {
+        "kicker": {
+          "type": "kicker",
+          "settings": {
+            "kicker": "OPENSOURCE"
+          }
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {
+            "rating_text": "1000+ QUENCHED"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Click if you're thirsty.",
+            "text_size": 12
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_text": "SHOP ELECTROLYTES",
+            "button_link": "shopify://collections/all",
+            "button_style": "btn",
+            "button_size": "btn--large",
+            "button_color": "btn--black"
+          }
+        }
+      },
+      "block_order": ["kicker", "rating", "heading", "button"],
+      "settings": {
+        "width": "wrapper--full",
+        "text_align": "align--middle-left",
+        "text_color": "text--black",
+        "color_bg": "palette--light bg--neutral",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
     "section_announcement_ERtALW": {
       "type": "section-announcement",
       "blocks": {
@@ -662,6 +705,7 @@
   },
   "order": [
     "hero",
+    "thirsty_banner",
     "section_announcement_ERtALW",
     "section_richtext_a3fGJt",
     "section_announcement_DWF6Et",

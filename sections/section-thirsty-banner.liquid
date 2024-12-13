@@ -1,0 +1,325 @@
+<!-- /sections/section-thirsty-banner.liquid -->
+
+{%- assign scroll_class = '' -%}
+<div class="section--image fade-in-child js-overflow-container {{ scroll_class }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="thirsty-banner"
+  style="
+  --PT: {{ section.settings.padding_top }}px;
+  --PB: {{ section.settings.padding_bottom }}px;
+  --CONTENT-WIDTH: {{ section.settings.content_width }}px;">
+  <div class="{{ section.settings.width }} section-padding">
+    <div class="section__inner">
+      <div class="hero__content__wrapper {{ section.settings.text_align }}">
+        <div class="hero__content {{ section.settings.color_bg }} js-overflow-content">
+          {%- assign animation_anchor = "[data-section-id='" | append: section.id | append: "']" -%}
+          {%- assign elements_counter = 0 -%}
+
+          <div class="text__standard {{ section.settings.text_color }}" style="--bg: {{ section.settings.overlay_color }}; --opacity: {{ section.settings.overlay_opacity | times: 0.01 }};">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'kicker' %}
+                  {% unless block.settings.kicker == '' %}
+                    {%- assign elements_counter = elements_counter | plus: 1 -%}
+                    <div class="hero__kicker"
+                      data-aos="hero"
+                      data-aos-anchor="{{ animation_anchor }}"
+                      data-aos-order="{{ elements_counter }}"
+                      {{ block.shopify_attributes }}>
+                      <p>✦ {{ block.settings.kicker }}</p>
+                    </div>
+                  {% endunless %}
+
+                {% when 'rating' %}
+                  {% unless block.settings.rating_text == '' %}
+                    {%- assign elements_counter = elements_counter | plus: 1 -%}
+                    <div class="hero__rating"
+                      data-aos="hero"
+                      data-aos-anchor="{{ animation_anchor }}"
+                      data-aos-order="{{ elements_counter }}"
+                      {{ block.shopify_attributes }}>
+                      <p>★★★★★ {{ block.settings.rating_text }}</p>
+                    </div>
+                  {% endunless %}
+
+                {% when 'heading' %}
+                  {% unless block.settings.title == '' %}
+                    {%- assign elements_counter = elements_counter | plus: 1 -%}
+                    {% assign heading_size_class = block.settings.text_size | prepend: 'heading-size-' %}
+                    <div class="hero__title {{ heading_size_class }}"
+                      data-aos="hero"
+                      data-aos-anchor="{{ animation_anchor }}"
+                      data-aos-order="{{ elements_counter }}"
+                      {{ block.shopify_attributes }}>
+                      <p>{{ block.settings.title }}</p>
+                    </div>
+                  {% endunless %}
+
+                {% when 'button' %}
+                  {% unless block.settings.button_text == '' %}
+                    {%- assign elements_counter = elements_counter | plus: 1 -%}
+                    <div class="hero__cta__wrapper" {{ block.shopify_attributes }}>
+                      <a class="standard__cta hero__btn {{ block.settings.button_style }} {{ block.settings.button_color }} {{ block.settings.button_size }}"
+                        href="{{ block.settings.button_link | default: '#' }}"
+                        data-aos="hero"
+                        data-aos-anchor="{{ animation_anchor }}"
+                        data-aos-order="{{ elements_counter }}">
+                        {{ block.settings.button_text }}
+                      </a>
+                    </div>
+                  {% endunless %}
+
+                {% when 'image' %}
+                  {%- assign elements_counter = elements_counter | plus: 1 -%}
+                  <div class="standard__image"
+                    style="width: {{ block.settings.image_max_limit | append: 'px' }}; max-width: 100%;"
+                    data-aos="hero"
+                    data-aos-anchor="{{ animation_anchor }}"
+                    data-aos-order="{{ elements_counter }}"
+                    {{ block.shopify_attributes }}>
+                    {%- if block.settings.image_link != blank -%}<a href="{{ block.settings.image_link }}">{%- endif -%}
+                    {%- assign wh_ratio = block.settings.image.aspect_ratio | default: 1 -%}
+                    {%- capture sizes -%}min({{ block.settings.image_max_limit }}px, 100vw){%- endcapture -%}
+                    {% render 'image', img_object: block.settings.image, sizes: sizes, wh_ratio: wh_ratio %}
+                    {%- if block.settings.image_link != blank -%}</a>{%- endif -%}
+                  </div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.hero__rating {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.hero__kicker {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.hero__title {
+  font-size: 4em;
+  font-weight: bold;
+  margin-bottom: 1em;
+  line-height: 1.1;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Thirsty Banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "default": "wrapper--none",
+      "options": [
+        { "value": "wrapper--none", "label": "Full width" },
+        { "value": "wrapper--full", "label": "Full width padded" },
+        { "value": "wrapper", "label": "Page width" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text alignment",
+      "default": "align--middle-left",
+      "options": [
+        { "value": "align--middle-left", "label": "Left"},
+        { "value": "align--middle-center", "label": "Center"},
+        { "value": "align--middle-right", "label": "Right"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "text--black",
+      "options": [
+        { "value": "text--black", "label": "Black"},
+        { "value": "text--white", "label": "White"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "color_bg",
+      "label": "Background color",
+      "default": "hero__content--transparent",
+      "options": [
+        { "value": "hero__content--transparent", "label": "None"},
+        { "value": "palette--light bg--neutral", "label": "White"}
+      ]
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 50
+    },
+    {
+      "type": "range", 
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "kicker",
+      "name": "Kicker",
+      "settings": [
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Text",
+          "default": "OPENSOURCE"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Rating",
+      "settings": [
+        {
+          "type": "text",
+          "id": "rating_text",
+          "label": "Rating text",
+          "default": "1000+ QUENCHED"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Click if you're thirsty."
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Text size",
+          "min": 1,
+          "max": 15,
+          "step": 1,
+          "default": 12
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "SHOP ELECTROLYTES"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "default": "btn",
+          "options": [
+            { "value": "btn", "label": "Solid button" },
+            { "value": "btn--outline", "label": "Outlined button" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_size",
+          "label": "Button size",
+          "default": "btn--large",
+          "options": [
+            { "value": "btn--small", "label": "Small" },
+            { "value": "btn--medium", "label": "Medium" },
+            { "value": "btn--large", "label": "Large" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "button_color",
+          "label": "Button color",
+          "default": "btn--black",
+          "options": [
+            { "value": "btn--primary", "label": "Primary" },
+            { "value": "btn--black", "label": "Black" },
+            { "value": "btn--white", "label": "White" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_max_limit",
+          "min": 100,
+          "max": 800,
+          "step": 10,
+          "unit": "px",
+          "label": "Max width",
+          "default": 500
+        },
+        {
+          "type": "url",
+          "id": "image_link",
+          "label": "Image link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thirsty Banner",
+      "blocks": [
+        {
+          "type": "kicker"
+        },
+        {
+          "type": "rating"
+        },
+        {
+          "type": "heading"
+        },
+        {
+          "type": "button"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
