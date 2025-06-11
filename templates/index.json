@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -29,7 +38,7 @@
           "type": "button",
           "settings": {
             "link_text_1": "REBOOT NOW",
-            "link_1": "shopify://products/os-electrolyte-stick-packs",
+            "link_1": "shopify://products/triple-magnesium-electrolyte-pods-300mg",
             "button_size_1": "btn--long",
             "button_style_1": "btn",
             "button_color_1": "btn--primary",
@@ -46,7 +55,12 @@
           }
         }
       },
-      "block_order": ["banner-kicker", "banner-heading", "banner-text", "banner-button"],
+      "block_order": [
+        "banner-kicker",
+        "banner-heading",
+        "banner-text",
+        "banner-button"
+      ],
       "settings": {
         "image": "shopify://shop_images/os_teaser.gif",
         "mobile_image": "shopify://shop_images/os_teaser.gif",
@@ -67,14 +81,6 @@
     "thirsty_banner": {
       "type": "section-thirsty-banner",
       "settings": {
-        "kicker_text": "OPENSOURCE",
-        "rating_text": "1000+ QUENCHED",
-        "heading": "Click if you're thirsty.",
-        "button_text": "SHOP ELECTROLYTES",
-        "button_link": "shopify://collections/all",
-        "button_style": "btn",
-        "button_size": "btn--large",
-        "button_color": "btn--black",
         "width": "wrapper--full",
         "text_align": "align--middle-left",
         "text_color": "text--black",
@@ -110,7 +116,11 @@
           }
         }
       },
-      "block_order": ["kicker_kQKXLT", "heading_PdNLc8", "text_AN6VMM"],
+      "block_order": [
+        "kicker_kQKXLT",
+        "heading_PdNLc8",
+        "text_AN6VMM"
+      ],
       "settings": {
         "align_text": "text-left",
         "text_color": "text--neutral",
@@ -132,7 +142,9 @@
           }
         }
       },
-      "block_order": ["heading_6RGJ4q"],
+      "block_order": [
+        "heading_6RGJ4q"
+      ],
       "settings": {
         "height": "use_screen_three_quarters",
         "color_bg": "palette--light bg--neutral",
